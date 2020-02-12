@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2020-02-12T12:15:58Z</date>
+    <groups>
+        <group>
+            <name>Linux servers</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Samba mounts</template>
+            <name>Template Samba mounts</name>
+            <description>Monitor samba mounts described in /etc/fstab</description>
+            <groups>
+                <group>
+                    <name>Linux servers</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>SambaMount</name>
+                </application>
+            </applications>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Samba mounts discovery</name>
+                    <key>samba.mounts.discovery</key>
+                    <delay>1h</delay>
+                    <lifetime>3d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>samba.share[{#SMBNAME}]</name>
+                            <key>samba.share[{#SMBNAME}]</key>
+                            <delay>1h</delay>
+                            <history>30d</history>
+                            <applications>
+                                <application>
+                                    <name>SambaMount</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last(0)}=0</expression>
+                                    <name>The mount point {#SMBNAME} is disconnected</name>
+                                    <priority>HIGH</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+        </template>
+    </templates>
+</zabbix_export>
