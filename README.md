@@ -1,5 +1,7 @@
 # Zabbix monitoring of Samba mounts defined in /etc/fstab
 
+![CI](https://github.com/appsinet/zabbix-samba-mounts/workflows/CI/badge.svg?branch=master)
+
 This project is composed by two shell scripts, a Zabbix template and a zabbix-agent configuration file:
 - The script discover_smb.sh checks for mount points defined in /etc/fstab with `cifs` type
 - The script smb_check.sh reads the exit of `mount` command, and checks if every mount point in fstab is mounted
